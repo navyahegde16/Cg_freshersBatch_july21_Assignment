@@ -1,0 +1,20 @@
+Create a simple text file at the command prompt. This file should contain three values - CPU, Memory and Disk space for an imaginary system, all on one line and delimited with a '|' character.
+
+Write a script to read that file and prompt the user for the delimiter value. Use that delimiter along with the IFS variable and read those delimited values into three appropriately named variables. Finally, display them with labels, one each per line.
+
+SCRIPT:
+#! /bin/bash
+
+echo "Enter Filename : \c"
+read filename
+IFS=\|
+set $imaginary_system
+echo $1
+echo $2
+echo $3
+
+OUTPUT:
+navya@navya:~/ss_assignment$ sh a18.sh
+CPU
+Memory
+Disk Space

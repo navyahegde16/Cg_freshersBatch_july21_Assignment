@@ -1,0 +1,30 @@
+Write a script that sets FOUR variables:
+MYUSERNAME
+MYPASSWORD
+STARTOFSCRIPT
+ENDOFSCRIPT
+Populate the first two with some default value and use command redirection to set the third and fourth value to the date/time of when the script was started and completed. Within the script, be sure to display the values to the terminal when run.
+
+SCRIPT:
+#! /bin/bash
+MYUSERNAME=navya
+echo MYUSERNAME = $MYUSERNAME
+
+MYPASSWORD="abc123"
+echo MYPASSWORD = $MYPASSWORD
+
+echo "Enter Start Of Script date: \c"
+read SOS
+echo "START OF SCRIPT = $SOS"
+
+echo "Enter End of Script date: \c"
+read EOS
+echo "END OF SCRIPT = $EOS"
+
+OUTPUT:
+MYUSERNAME = navya
+MYPASSWORD = abc123
+Enter Start Of Script date: 06/08/2021                        
+START OF SCRIPT = 06/08/2021
+Enter End of Script date: 07/08/2021
+END OF SCRIPT = 07/08/2021

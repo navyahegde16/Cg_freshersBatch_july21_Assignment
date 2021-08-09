@@ -1,0 +1,22 @@
+Write a script that evaluates and displays the following arithmetic operations:
+Add two numbers
+Add two numbers and multiply by a third, do not group anything 
+Add two numbers, grouped (changing order of precedence) and multiply by a third
+
+Keep in mind special characters and/or escape characters as needed.
+
+SCRIPT:
+#! /bin/bash
+num1=20
+num2=30
+num3=45
+add=$(expr $num1 + $num2 ) 
+echo $add
+echo $(expr $add \* $num3 )
+echo $(expr $(expr $num1 + $num2 ) \* $num3 )
+
+OUTPUT:
+navya@navya:~/ss_assignment$ sh a6.sh
+50
+2250
+2250

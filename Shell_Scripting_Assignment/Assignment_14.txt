@@ -1,0 +1,44 @@
+Develop a simple three item menu to display on the terminal. Your script, upon display of the menu, should prompt the user to choose one of the three available options. Using the 'case' statement from the course, display three unique messages depending on which number they chose, with a catch all message letting them know if they went outside the bounds of instructions.
+
+SCRIPT:
+#! /bin/bash
+echo "vadapav , paav bhaji , sev puri"
+echo "Which one would u choose from the above three menu?? \c"
+read menu
+case $menu in
+"vadapav")
+	echo "Price for $menu is Rs.10"
+	;;
+"paav bhaji")
+	echo "Price for $menu is Rs.25"
+	;;
+"sev puri")
+	echo "Price for $menu is Rs.15"
+	;;
+*)
+	echo "$menu is not available"
+	;;
+Esac
+
+
+
+OUTPUT:
+navya@navya:~/ss_assignment$ sh a14.sh
+vadapav , paav bhaji , sev puri
+Which one would u choose from the above three menu?? vadapav
+Price for vadapav is Rs.10
+
+navya@navya:~/ss_assignment$ sh a14.sh
+vadapav , paav bhaji , sev puri
+Which one would u choose from the above three menu?? sev puri
+Price for sev puri is Rs.15
+
+navya@navya:~/ss_assignment$ sh a14.sh
+vadapav , paav bhaji , sev puri
+Which one would u choose from the above three menu?? paav bhaji
+Price for paav bhaji is Rs.25
+
+navya@navya:~/ss_assignment$ sh a14.sh
+vadapav , paav bhaji , sev puri
+Which one would u choose from the above three menu?? aloo tikee
+aloo tikee is not available

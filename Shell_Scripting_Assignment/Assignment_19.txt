@@ -1,0 +1,32 @@
+We need to create a menu for our users. Display a menu containing three choices AND a choice to allow them to exit. Display that menu and prompt for a choice. Upon choosing the value, it should simply clear the screen and redisplay the menu (loop until the exit choice is given).
+HOWEVER, we need to be sure that the end user cannot use CTL-C, CTL-Z or a KILL command to terminate the application. Add a 'trap' in the script to capture those attempts and provide instructions on how to exit the script using the menu choice instead.
+
+SCRIPT:
+#! /bin/bash
+echo "vadapav , paav bhaji , sev puri"
+echo "Which one would u choose from the above three menu?? \c"
+read menu
+trap 'echo "Enter exit to come out of loop"' 2 9 15
+case $menu in
+"vadapav")
+	clear
+	sh ./a19.sh;;
+"paav bhaji")
+	clear
+	sh ./a19.sh;;
+"sev puri")
+	clear
+	sh ./a19.sh;;
+"exit")
+	exit 0;;
+*)
+	clear
+	sh ./a19.sh;;
+
+esac
+
+OUTPUT:
+navya@navya:~/ss_assignment$ sh a19.sh
+vadapav , paav bhaji , sev puri
+Which one would u choose from the above three menu?? vadapav
+

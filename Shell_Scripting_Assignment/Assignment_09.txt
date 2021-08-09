@@ -1,0 +1,11 @@
+Write a script intended to iterate through an array called SERVERLIST containing at least four values (server names). Display all four values to the terminal when run.
+
+SCRIPT:
+#! /bin/bash
+
+SERVERLIST=('Ubuntu' 'Sql' 'Linux' 'CentOS')
+echo "${SERVERLIST[@]}"
+
+OUTPUT:
+navya@navya:~/ss_assignment$ sh a9.sh
+Ubuntu Sql Linux CentOS

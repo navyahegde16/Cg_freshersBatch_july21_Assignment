@@ -1,0 +1,22 @@
+Create a script that prompts the user for a number. That number is to be used to display a simple message to the terminal X number of times (where X is the number captured from the user input). The message should include an indication of the number for each count the message is displayed.
+
+SCRIPT:
+#! /bin/bash
+
+echo "Enter number : \c"
+read n
+count=1
+while [ $count -le $n ]
+do
+	echo "This is line number $count"
+	count=$(( count+1 ))
+done
+
+OUTPUT:
+navya@navya:~/ss_assignment$ sh a15.sh
+Enter number : 5
+This is line number 1
+This is line number 2
+This is line number 3
+This is line number 4
+This is line number 5
