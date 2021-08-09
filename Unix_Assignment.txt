@@ -1,0 +1,293 @@
+Objective:- Assignments will help trainees to understand the basics of unix command and how to explore and use it.
+
+DO NOT copy paste commands from internet, you can take help of the Unix in-built command manual.
+
+Be Honest to yourself!
+
+Important command and option to learn unix commands:-
+man Command
+Example:-
+man ls
+
+--help Option
+Example:-
+ls --help
+
+NOTE:- Always use "man" command before using any unix commands and read about it and its options and how to use it.
+
+Assignments:-
+
+1)List the contents of a directory and their attributes
+-> ls
+
+2)Long list the content with file, directory ownership, permissions,sizes, etc…
+-> ls -l
+
+3)Display the size of the file in human readable format
+-> ls -l -h
+
+4)Show all files and folders including hidden one
+-> ls -a
+
+5)list directories recursively
+-> ls -r
+
+6)Sort the files by size with largest at the top
+-> ls -lahS
+
+7)Sort the files by last time modified displaying the newest first.
+-> ls -lt
+
+8)Display the location of a program/command, where it is installed.
+-> whereis <command>
+   e.g. whereis mv
+
+9)Which command is used to switch directory from one to another
+-> cd directory_name
+
+10)List all the environment variables set for the current shell environment
+-> env
+
+11)Did you notice something in the output of "env" command?
+-> It prints the current environment variable and they are un sorted.
+
+12)Which command is used to print the text or any variables value in the Console/Terminal?
+-> echo
+
+13)Print the value of the env variable "PATH" on the console
+-> echo $PATH
+
+14)Is linux a case-sensitive operating system?
+-> Yes
+
+15)Is, "Ls" same as "ls"?
+-> No
+
+16)Display your currently logged in user
+-> who
+
+17)how do you change the currently logged in user to another user?
+-> su [username]
+
+18)Which command is used to leave a shell environment that you are currently logged in to?
+-> exit [n]
+
+19)How do you reboot the system?
+-> reboot
+
+20)How do you shutdown the system?
+-> shutdown
+
+21)Display all the major running processes in the system
+-> ps -A 
+
+22)Understand the output of command used in above question of displaying processes, explain the meaning of each column and what data it displays?
+-> PID- Process Identifier- displays unique process id for each process in the system.
+    TTY-  TeleTYpewriter- controlling terminal associated with process
+    TIME- total CPU time of process
+    CMD- command that is executed by the process
+
+23)Display the name of the system kernel
+-> uname -s
+
+24)display the kernel release number
+-> uname -r
+
+25)display teh machine type of the current kernel
+-> uname -m
+
+26)Display the name of the operating system that the kernel is running on
+-> uname -o
+
+27)Display all info that uname command can show.
+-> uname -a
+
+28)Display the name of directory that you are currently pointing to
+-> pwd
+
+29)change the current directory to another directory that you have in your system.
+-> cd dir_name
+
+30)Go up one directory
+-> cd
+
+31)Return to last directory
+-> cd ..
+
+32)change the current directory to home(logged in user's) directory
+-> cd $HOME
+
+33)How to check all the command used from the prompt (Command History)
+-> history
+
+34)In which file the history of commands are stored in?
+-> in .bash_history file in home directory
+   command to see history file - $HISTFILE
+
+35)How many lines of history does the system keep and from where you can change it?
+-> echo $HISTSIZE and we can change it using command : export HISTFILESIZE=10000
+
+36)How can you modify bash's history behaviour
+-> We can modify bash’s history using export with the history feature command. 
+     Example : export HISTSIZEFORMAT=’%F,%T’
+                        export HISTCONTROL=ignoredups
+
+37)Display all the commands entered so far, now, try to run a particular command from the history list without typing that command.
+-> history -n
+
+NOTE:- TAB key is your friend when it comes to command completion and having long file and directory names autocompleted at the bash prompt for you. JUST BE LAZY AND USE TAB KEY FOR AUTO COMPLETION ;-)
+
+38)What are the different types of shell and where are they used and how do we use them?
+-> Types of shells and there use are :-
+The C Shell (csh) - It includes helpful programming features like built-in arithmetic and C-like  expression syntax.
+The Bourne Shell (sh) - A Bourne shell enables the writing and executing of shell scripts, which provide basic program control flow, control over input/output (I/O) file descriptors and all key features required to create scripts or structured programs for shell.
+The Korn Shell (ksh) - It includes features like built-in arithmetic and C-like arrays, functions, and string-manipulation facilities.It is faster than C shell.
+GNU Bourne - Again Shell (bash) - Bourne again shell (Bash) is a free Unix shell that can be used in place of the Bourne shell. It is a complete implementation of the IEEE Portable Operating System Interface for Unix (POSIX) and Open Group shell specification.
+The Z Shell (zh) - is an extended version of the Bourne Shell (sh), with plenty of new features, and support for plugins and themes   We can use them by following commands:
+We use them using following commands :
+$ cat /etc/shells
+# /etc/shells: valid login shells
+/bin/sh
+/bin/bash
+/usr/bin/bash
+/bin/rbash
+/usr/bin/rbash
+/bin/dash
+/usr/bin/dash
+
+39)What is the difference between login shell and non-login shell?
+-> The Login shell has "-" before the shell(ex. -bash) and the Non-Login shell does not have "-". The difference is that with login shell, you load the profile of the submission user whereas the non-login shell it will load the default environment. By default, the Shell parameter is empty so it will use the non-login shell.
+
+40)How do we start login shell and non-login shell?
+-> We can start login shell using the following commands – 
+1) su -l		2) su USERNAME -	3) su –login
+We can start non-login shell using the following commands – 
+1)	Su 	2) su USERNAME
+
+41)What happens when you start a login shell (which files are read and used and Why)?
+->  Upon start-up, your login shell consults two sets of files:
+1.	users', as well as the system-wide login shell initialisation files also known as the profile files
+2.	users', as well as the system-wide non-login shell initialisation files commonly referred to as 'shell rc' files.
+Your login shell will set the PATH environment variable, TERM, the UID and GID of the terminal amongst other things. These are the essential requirements in order to work efficiently.
+
+42)What happens when you start a non-login shell (Which files are read and used and Why)?
+-> The non-login shell (bash in my case) files are:
+/etc/bashrc
+~/.bashrc         
+which are run in order to set up variables and other necessaries at shell initialisation.
+There are many things you can achieve using these files. For example you can initialise parameters, you can set your PATH, you can set what your prompt looks like, and much more.
+Using these files, you can set up your entire environment. Obviously because you, are the owner of your ~/.bash_profile and ~/.bashrc, you have full control to make changes to these files.
+
+43)What are Shell Configuration Files, why do we need it?
+-> Shell configuration files are executed automatically when you log in and out of a shell. They initialize and configure a shell upon login and perform cleanup operations upon logout.Configuration files (commonly known as config files) are files used to configure the parameters and initial settings for some computer programs. They are used for user applications, server processes and operating system settings.
+
+44)Explain the Order of file usage from the system/user's home directory when user logs in to the System.
+->
+
+45)What are Shell Variables, list major shell variables and what do they represent?
+-> A shell variable is a special variable that is set by the shell and is required by the shell in order to function correctly. Some of these variables are environment variables whereas others are local variables. A variable is a character string to which we assign a value. The value assigned could be a number, text, filename, device, or any other type of data. A variable is nothing more than a pointer to the actual data. The shell enables you to create, assign, and delete variables.
+
+46)How we see all our env variables?
+-> printenv
+
+
+47)How we see all env variables in alphabical order?
+-> env | sort
+
+48)What Format does the env var and its values are stored?
+-> Environmental variables are stored in key-value pair format. The variable and its values are separated by an equal sign, if there are multiple values they are separated by semicolon and variables that contain spaces are written under quotation marks.
+
+49)How do you create your own variable?
+-> NAME="Navya Hegde"
+   echo $NAME
+
+50)How do you start a new bash shell?
+-> bash
+
+51)Difference between Local/Shell variables to Global Variable
+-> Local Variable will work only within function or within condition statement only. If your calling local variable from outside of function or outside of statement it will not work.
+Global Variables are also called as environment variables, which will be available to all shells. printenv command is used to display all the environment variables.
+
+52)Making a variable accessible from other the shell in the system.
+-> 
+
+53)Show the real life use case of exporting a variable
+-> 
+
+54)Convert the above script file into a command, The file should run with "myappp" instead of "myapp.sh"
+-> mv myapp.sh myappp
+
+55)What is Globbing? Explain in depth with examples?
+-> The Bash shell feature that is used for matching or expanding specific types of patterns is called globbing. Globbing is mainly used to match filenames or searching for content in a file. Globbing uses wildcard characters to create the pattern.
+Example : ls hello[!3]: It will display the directories starting with hello, ending with any character but not 3
+ls hell?:‘hello?’ will match all files or directories whose starting characters are ‘hello’ and it will recognize one more character. 
+ls [[:alpha:]]* : Will display the directories starting with an alphabet (either in lower or uppercase) and ending  with any characters.
+
+56)List all entries with extension ".sh"
+-> find *.sh
+
+57)List all entries with numbers in it.
+-> ls | grep -E ‘^[0-9]+$’
+
+58)List all entries that starts with a character and ends with a number
+-> ls | grep -E "^a.*e$"
+
+59)List all entries that name length more than 5 characters
+->
+
+60)What is Quoting? and Why do we need it?
+-> Quoting is used to remove the special meaning of certain characters or words to the shell.
+   Quoting can be used to disable special treatment for special characters, to prevent reserved words 
+   from being recognized as such, and to prevent parameter expansion.
+
+61)Write few(minimum 3) unique examples that shows, how a particular problem is solved using Quoting.
+-> 1. echo Hello World\;
+      OUTPUT : Hello World;
+   2. echo I have \$120
+      OUTPUT : I have $120
+   3. echo It\'s unix assignment
+      OUTPUT : It's unix assignment
+
+62)How do you find a particular files/directories based on a particular search criteria?
+HINT:- look for commands -> locate, find and whereis
+-> locate filename/directory_name
+
+63)Write major difference between locate, find and whereis?
+-> Big difference is that find searches real files recursively down a given directory.
+Locate searches a database without requiring specific directory. Thus, if you have saved a file before updating database, find will find it , but locate won't.
+Whereis and which, they search only inside those directories that are mentioned in your PATH variable and only those with executable permission set.
+
+64)How Globbing is different from locate, find and whereis?
+-> Globbing will search real files recursively down a given directory,while locate will search a database without specific directory and find will search in a given directory and whereis will search commands/programs.
+
+65)Explain the Linux File System.
+-> Linux file system is generally a built-in layer of a Linux operating system used to handle the 
+   data management of the storage. It helps to arrange the file on the disk storage. It manages the 
+   file name, file size, creation date, and much more information about a file.
+
+66)Explain absolute and Relative Paths
+-> An absolute path is defined as specifying the location of a file or directory from the root directory(/). 
+   In other words,we can say that an absolute path is a complete path from start of actual file system 
+   from / directory.
+   Relative path is defined as the path related to the present working directly(pwd). 
+   It starts at your current directory and never starts with a / .
+
+67)What are the different ways of creating a File in linux System? Write an example of each and the difference between them.
+-> Different types of creating a file in linux system are as follows: 
+   1. touch filename1.txt => This creates a new empty file named filename.txt
+   2. > filename2.txt => This creates a new empty file.
+   3. cat > filename3.txt =>  the command displays the contents of filename3.txt on the screen. The redirection operator > tells the system to place it in the filename3.txt file.
+   4. echo ‘Text’ > filename4.txt => The echo command will duplicate whatever you specify in the command, and put the copy into a file.
+   5. printf ‘First line of text’ filename5.txt => The printf command works like the echo command, and it adds some formatting functionality. 
+   6. vim filename6.txt => it is used for creating and modifying. 
+
+68)In how many ways we can delete the files from linux system? write an example of each and teh difference between them.
+-> 1. rm filename => removes file.
+   2. rm -r directory_name => removes directory.
+   3. rmdir dir_name => removes directory. 
+
+69)Archiving files using linux command, write a command to archive set of files from linux commands.
+-> tar -csf file.tar filename
+
+70)Extract the archived files from the above step.
+-> tar -xvf file.tar
