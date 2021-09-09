@@ -1,0 +1,809 @@
+Basic Assignment
+
+NOTE: Do not forget to see manual page using "--help" option in command when searching for options/commands for a particular task.
+
+1. Install Docker, either on your native OS or on a VM. Make sure it runs. type "docker -v" to check if it's installed.
+   try below commands for help
+	docker --help  ---> This command shows all available options and commands to work with images and containers
+
+Ans: Docker version 20.10.8, build 3967b7d
+
+	docker images --help ---> This command shows all the avaialble options and commands to work with docker images
+
+Ans: Usage:  docker [OPTIONS] COMMAND
+A self-sufficient runtime for containers
+Options:
+      --config string      Location of client config files (default
+                           "C:\\Users\\Navya\\.docker")
+  -c, --context string     Name of the context to use to connect to the
+                           daemon (overrides DOCKER_HOST env var and
+                           default context set with "docker context use")
+  -D, --debug              Enable debug mode
+  -H, --host list          Daemon socket(s) to connect to
+  -l, --log-level string   Set the logging level
+                           ("debug"|"info"|"warn"|"error"|"fatal")
+                           (default "info")
+      --tls                Use TLS; implied by --tlsverify
+      --tlscacert string   Trust certs signed only by this CA (default
+                           "C:\\Users\\Navya\\.docker\\ca.pem")
+      --tlscert string     Path to TLS certificate file (default
+                           "C:\\Users\\Navya\\.docker\\cert.pem")
+      --tlskey string      Path to TLS key file (default
+                           "C:\\Users\\Navya\\.docker\\key.pem")
+      --tlsverify          Use TLS and verify the remote
+  -v, --version            Print version information and quit
+
+Management Commands:
+  builder     Manage builds
+  buildx*     Build with BuildKit (Docker Inc., v0.6.1-docker)
+  compose*    Docker Compose (Docker Inc., v2.0.0-rc.2)
+  config      Manage Docker configs
+  container   Manage containers
+  context     Manage contexts
+  image       Manage images
+  manifest    Manage Docker image manifests and manifest lists
+  network     Manage networks
+  node        Manage Swarm nodes
+  plugin      Manage plugins
+  scan*       Docker Scan (Docker Inc., v0.8.0)
+  secret      Manage Docker secrets
+  service     Manage services
+  stack       Manage Docker stacks
+  swarm       Manage Swarm
+  system      Manage Docker
+  trust       Manage trust on Docker images
+  volume      Manage volumes
+
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container
+  build       Build an image from a Dockerfile
+  commit      Create a new image from a container's changes
+  cp          Copy files/folders between a container and the local filesystem
+  create      Create a new container
+  diff        Inspect changes to files or directories on a container's filesystem
+  events      Get real time events from the server
+  exec        Run a command in a running container
+  export      Export a container's filesystem as a tar archive
+  history     Show the history of an image
+  images      List images
+  import      Import the contents from a tarball to create a filesystem image
+  info        Display system-wide information
+  inspect     Return low-level information on Docker objects
+  kill        Kill one or more running containers
+  load        Load an image from a tar archive or STDIN
+  login       Log in to a Docker registry
+  logout      Log out from a Docker registry
+  logs        Fetch the logs of a container
+  pause       Pause all processes within one or more containers
+  port        List port mappings or a specific mapping for the container
+  ps          List containers
+  pull        Pull an image or a repository from a registry
+  push        Push an image or a repository to a registry
+  rename      Rename a container
+  restart     Restart one or more containers
+  rm          Remove one or more containers
+  rmi         Remove one or more images
+  run         Run a command in a new container
+  save        Save one or more images to a tar archive (streamed to STDOUT by default)
+  search      Search the Docker Hub for images
+  start       Start one or more stopped containers
+  stats       Display a live stream of container(s) resource usage statistics
+  stop        Stop one or more running containers
+  tag         Create a tag TARGET_IMAGE that refers to SOURCE_IMAGE
+  top         Display the running processes of a container
+  unpause     Unpause all processes within one or more containers
+  update      Update configuration of one or more containers
+  version     Show the Docker version information
+  wait        Block until one or more containers stop, then print their exit codes
+
+Run 'docker COMMAND --help' for more information on a command.
+To get more help with docker, check out our guides at https://docs.docker.com/go/guides/
+
+	docker ps --help ---> This command shows all the avaialble options and commands to work with docker containers
+
+Ans:  Usage:  docker ps [OPTIONS]
+List containers
+Options:
+  -a, --all             Show all containers (default shows just running)
+  -f, --filter filter   Filter output based on conditions provided
+      --format string   Pretty-print containers using a Go template
+  -n, --last int        Show n last created containers (includes all
+                        states) (default -1)
+  -l, --latest          Show the latest created container (includes all
+                        states)
+      --no-trunc        Don't truncate output
+  -q, --quiet           Only display container IDs
+  -s, --size            Display total file sizes
+
+2. Find a image from dockerhub of your choice(recommeded: nginx), don't use browser, pull the official image from dockerhub
+
+Ans: docker pull nginx
+Using default tag: latest
+latest: Pulling from library/nginx
+a330b6cecb98: Pull complete
+5ef80e6f29b5: Pull complete
+f699b0db74e3: Pull complete
+0f701a34c55e: Pull complete
+3229dce7b89c: Pull complete
+ddb78cb2d047: Pull complete
+Digest: sha256:c442ff5a3d9f6dc92dd8aee388ece42d965e002805e3edaaff34e79d8ee6d0a4
+Status: Downloaded newer image for nginx:latest
+docker.io/library/nginx:latest
+
+3. List all the available images in your machine/vm, make sure you see recently pulled image in the list.
+
+Ans: docker images
+REPOSITORY               TAG       IMAGE ID       CREATED        SIZE
+nginx                    latest    822b7ec2aaf2   3 hours ago    133MB
+docker/getting-started   latest    083d7564d904   2 months ago   28MB
+
+4. Find out the "Full" ImageId of the image that you pulled and write it below.
+Ans: docker inspect 822b7ec2aaf2
+"Id": "sha256:822b7ec2aaf2122b8f80f9c7f45ca62ea3379bf33af4e042b67aafbf6eac1941"
+
+5. Create a container of your image
+Ans: docker run -d -p 8081:8080 --name my-nginx 822b7ec2aaf2
+b8ea1c4c27918d136ed6c089030c66a047fef66e80dca32d87931fe44659035f
+ 
+6. List all the running containers
+
+Ans: docker ps
+CONTAINER ID   IMAGE                    COMMAND                  CREATED              STATUS              PORTS                                               NAMES
+b8ea1c4c2791   822b7ec2aaf2             "/docker-entrypoint.…"   About a minute ago   Up About a minute   80/tcp, 0.0.0.0:8081->8080/tcp, :::8081->8080/tcp   my-nginx
+7a600b5c2b37   docker/getting-started   "/docker-entrypoint.…"   About an hour ago    Up About an hour    0.0.0.0:80->80/tcp, :::80->80/tcp                   priceless_hertz
+
+7. List all the running and stopped containers
+
+Ans: docker ps -a
+CONTAINER ID   IMAGE                    COMMAND                  CREATED             STATUS             PORTS                                               NAMES
+b8ea1c4c2791   822b7ec2aaf2             "/docker-entrypoint.…"   6 minutes ago       Up 6 minutes       80/tcp, 0.0.0.0:8081->8080/tcp, :::8081->8080/tcp   my-nginx
+7a600b5c2b37   docker/getting-started   "/docker-entrypoint.…"   About an hour ago   Up About an hour   0.0.0.0:80->80/tcp, :::80->80/tcp                   priceless_hertz
+
+8. Find out the "Full" containerId of the container and write it below.
+
+Ans: docker inspect b8ea1c4c2791
+"Id": "b8ea1c4c27918d136ed6c089030c66a047fef66e80dca32d87931fe44659035f"
+
+9. Find out how many image layers are used to build this image.
+
+Ans: docker inspect 822b7ec2aaf2
+"Layers": [
+                "sha256:d000633a56813933cb0ac5ee3246cf7a4c0205db6290018a169d7cb096581046",
+                "sha256:63b5f2c0d071d1ac41fe869b0f2321c3adec53d8d51b4a03017d865c38dd41f8",
+                "sha256:875b5b50454b905c1046c99ab65e403bf27400bf9c96c157332cda2538698dc2",
+                "sha256:ed94af62a494fbea70c27afcedea4c303817196b50e8dd98b5be88cd514aab01",
+                "sha256:8e58314e4a4fbd97b70bed2b4c5f4b2911ff7f3e3ee310be89fab1120768d533",
+                "sha256:d47e4d19ddecb22dc95d641e9c29192a2d13e8506bc60d1c8f6452685ed63634"
+            ]
+
+10. Get the Apache Tomcat 7 server image from the docker hub.
+
+Ans: docker pull tomcat:7.0
+7.0: Pulling from library/tomcat
+0bc3020d05f1: Downloading     27MB/50.44MB
+a110e5871660: Download complete
+83d3c0fa203a: Downloading  9.329MB/9.997MB
+a8fd09c11b02: Downloading  4.717MB/51.84MB
+96ebf1506065: Waiting
+26b72ffca293: Waiting
+0bc3020d05f1: Pull complete
+a110e5871660: Pull complete
+83d3c0fa203a: Pull complete
+a8fd09c11b02: Pull complete
+96ebf1506065: Pull complete
+26b72ffca293: Pull complete
+0bffa2ea17aa: Pull complete
+d880cebcc7a6: Pull complete
+d19ab8039b36: Pull complete
+5057492dc495: Pull complete
+Digest: sha256:f7d37d248d0eacec1e5995736234c9c22155626fcb27ea3ead13b9db24e698f7
+Status: Downloaded newer image for tomcat:7.0
+docker.io/library/tomcat:7.0
+
+11. Run the Apache Tomcat 7, I mean create a container of Apache Tomcat.
+
+Ans: docker run -it -p 8085:8080 --name mytomcat 9dfd74e6bc2f
+
+12. Find out what is the IP Address of the Apache Tomcat Container that it is running on
+
+Ans: docker inspect mytomcat
+"IPAddress": "172.17.0.3"
+
+13. Which Port it is using?
+
+Ans: docker inspect mytomcat
+"HostPort": "8085"
+
+14. Try to access the Tomcat's home page from your machine/vm.
+
+Ans: Done
+
+15. What is the disk size of Apache Tomcat image?
+
+Ans: docker ps -s
+533MB
+
+16. Find out list of all environment variables that is configured for tomcat image, can you see JAVA_HOME and CATALINA_HOME? What did you notice about it?
+
+Ans:  "Env": [
+                "PATH=/usr/local/tomcat/bin:/usr/local/openjdk-8/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "JAVA_HOME=/usr/local/openjdk-8",
+                "LANG=C.UTF-8",
+                "JAVA_VERSION=8u292",
+                "CATALINA_HOME=/usr/local/tomcat",
+                "TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib",
+                "LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib",
+                "GPG_KEYS=05AB33110949707C93A279E3D3EFE6B686867BA6 07E48665A34DCAFAE522E5E6266191C37C037D42 47309207D818FFD8DCD3F83F1931D684307A10A5 541FBE7D8F78B25E055DDEE13C370389288584E7 61B832AC2F1C5A90F0F9B00A1C506407564C17A3 713DA88BE50911535FE716F5208B0AB1D63011C7 79F7026C690BAA50B92CD8B66A3AD3F4F22C4FED 9BA44C2621385CB966EBA586F72C284D731FABEE A27677289986DB50844682F8ACB77FC2E86E29AC A9C5DF4D22E99998D9875A5110C01C5A2F6059E7 DCFD35E0BF8CA7344752DE8B6FB21E8933C60243 F3A04C595DB5B6A5F1ECA43E3B7BBB100D811BBE F7DA48BB64BCB84ECBA7EE6935CD23C10D498E23",
+                "TOMCAT_MAJOR=7",
+                "TOMCAT_VERSION=7.0.109",
+                "TOMCAT_SHA512=612e830913bf1401bc9540e2273e465b0ee7ef63750a9969a80f1e9da9edb4888aa621fcc6fa5ba23cff94a40e91eb97e3f969b8064dabd49b2d0ea29e59b57e"
+            ]
+
+17. Find out which port is exposed for tomcat?
+
+Ans: 8085
+
+18. Run multiple containers of tomcat on different port and access it's home page.
+
+Ans: Done
+
+19. Pull ubuntu os from dockerhub, try to pull 2 images of ubuntu, Except the latest one.
+
+Ans: docker pull ubuntu:18.04
+18.04: Pulling from library/ubuntu
+e4ca327ec0e7: Pull complete
+Digest: sha256:9bc830af2bef73276515a29aa896eedfa7bdf4bdbc5c1063b4c457a4bbb8cd79
+Status: Downloaded newer image for ubuntu:18.04
+docker.io/library/ubuntu:18.04
+
+docker pull ubuntu:21.04
+21.04: Pulling from library/ubuntu
+d7e10407b4d9: Pull complete
+Digest: sha256:d5f1676ce05cd3251b583f19dad1793f9ab499baf463e730e494a640d6c77c2c
+Status: Downloaded newer image for ubuntu:21.04
+docker.io/library/ubuntu:21.04
+
+20. Run the container of ubuntu in attached mode.
+
+Ans: docker run -it --name MyUbuntu1 ubuntu:18.04
+root@2eeaf262cd4f:/#
+
+21. Run the container of another ubuntu in detached mode.
+
+Ans: docker run -d --name MyUbuntu2 ubuntu:21.04
+8ef53a10bb38f25279e78d6378a9cdc9cc201e277e1d322285cbbf52d13d5314
+
+22. Check how many ubuntu containers are running and stopped
+
+Ans: MyUbuntu1(attached mode) is running and MyUbuntu2(detached mode) is stopped
+
+23. Is the tomcat container running? If no, start one.
+
+Ans: docker start mytomcat
+mytomcat
+
+24. Check the logs, generated by tomcat container(don't forget to make request to tomcat's home page to see the log).
+
+Ans: docker logs mytomcat
+Using CATALINA_BASE:   /usr/local/tomcat
+Using CATALINA_HOME:   /usr/local/tomcat
+Using CATALINA_TMPDIR: /usr/local/tomcat/temp
+Using JRE_HOME:        /usr/local/openjdk-8
+Using CLASSPATH:       /usr/local/tomcat/bin/bootstrap.jar:/usr/local/tomcat/bin/tomcat-juli.jar
+Using CATALINA_OPTS:
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version name:   Apache Tomcat/7.0.109
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server built:          Apr 22 2021 18:43:38 UTC
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version number: 7.0.109.0
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Name:               Linux
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Version:            5.10.16.3-microsoft-standard-WSL2
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Architecture:          amd64
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Java Home:             /usr/local/openjdk-8/jre
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Version:           1.8.0_292-b10
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Vendor:            Oracle Corporation
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_BASE:         /usr/local/tomcat
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_HOME:         /usr/local/tomcat
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.config.file=/usr/local/tomcat/conf/logging.properties
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dignore.endorsed.dirs=
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.base=/usr/local/tomcat
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.home=/usr/local/tomcat
+Sep 03, 2021 11:05:15 AM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.io.tmpdir=/usr/local/tomcat/temp
+Sep 03, 2021 11:05:15 AM org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+INFO: Loaded Apache Tomcat Native library [1.2.28] using APR version [1.6.5].
+Sep 03, 2021 11:05:15 AM org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+INFO: APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+Sep 03, 2021 11:05:15 AM org.apache.catalina.core.AprLifecycleListener initializeSSL
+INFO: OpenSSL successfully initialized [OpenSSL 1.1.1d  10 Sep 2019]
+Sep 03, 2021 11:05:16 AM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-apr-8080"]
+Sep 03, 2021 11:05:16 AM org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 769 ms
+Sep 03, 2021 11:05:16 AM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Catalina]
+Sep 03, 2021 11:05:16 AM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.109
+Sep 03, 2021 11:05:16 AM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-apr-8080"]
+Sep 03, 2021 11:05:16 AM org.apache.catalina.startup.Catalina start
+INFO: Server startup in 61 ms
+Sep 03, 2021 12:54:25 PM org.apache.coyote.AbstractProtocol pause
+INFO: Pausing ProtocolHandler ["http-apr-8080"]
+Sep 03, 2021 12:54:25 PM org.apache.catalina.core.StandardService stopInternal
+INFO: Stopping service [Catalina]
+Sep 03, 2021 12:54:25 PM org.apache.coyote.AbstractProtocol stop
+INFO: Stopping ProtocolHandler ["http-apr-8080"]
+Sep 03, 2021 12:54:25 PM org.apache.coyote.AbstractProtocol destroy
+INFO: Destroying ProtocolHandler ["http-apr-8080"]
+Using CATALINA_BASE:   /usr/local/tomcat
+Using CATALINA_HOME:   /usr/local/tomcat
+Using CATALINA_TMPDIR: /usr/local/tomcat/temp
+Using JRE_HOME:        /usr/local/openjdk-8
+Using CLASSPATH:       /usr/local/tomcat/bin/bootstrap.jar:/usr/local/tomcat/bin/tomcat-juli.jar
+Using CATALINA_OPTS:
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version name:   Apache Tomcat/7.0.109
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server built:          Apr 22 2021 18:43:38 UTC
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Server version number: 7.0.109.0
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Name:               Linux
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: OS Version:            5.10.16.3-microsoft-standard-WSL2
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Architecture:          amd64
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Java Home:             /usr/local/openjdk-8/jre
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Version:           1.8.0_292-b10
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: JVM Vendor:            Oracle Corporation
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_BASE:         /usr/local/tomcat
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: CATALINA_HOME:         /usr/local/tomcat
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.config.file=/usr/local/tomcat/conf/logging.properties
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dignore.endorsed.dirs=
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.base=/usr/local/tomcat
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Dcatalina.home=/usr/local/tomcat
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.VersionLoggerListener log
+INFO: Command line argument: -Djava.io.tmpdir=/usr/local/tomcat/temp
+Sep 03, 2021 2:26:25 PM org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+INFO: Loaded Apache Tomcat Native library [1.2.28] using APR version [1.6.5].
+Sep 03, 2021 2:26:25 PM org.apache.catalina.core.AprLifecycleListener lifecycleEvent
+INFO: APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+Sep 03, 2021 2:26:25 PM org.apache.catalina.core.AprLifecycleListener initializeSSL
+INFO: OpenSSL successfully initialized [OpenSSL 1.1.1d  10 Sep 2019]
+Sep 03, 2021 2:26:25 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-apr-8080"]
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 1450 ms
+Sep 03, 2021 2:26:25 PM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service [Catalina]
+Sep 03, 2021 2:26:25 PM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.109
+Sep 03, 2021 2:26:25 PM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-apr-8080"]
+Sep 03, 2021 2:26:25 PM org.apache.catalina.startup.Catalina start
+INFO: Server startup in 81 ms
+
+25. Check if ubuntu container is running? If no, start one in attached mode to the terminal.
+
+Ans: MyUbuntu1 is running in attached mode
+
+26. Login as root user in ubuntu container
+
+Ans: root@2eeaf262cd4f:/# ls
+bin  boot  dev  etc  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+
+27. Create a file with any name in root directory
+
+Ans: root@2eeaf262cd4f:/# touch file1
+root@2eeaf262cd4f:/# ls
+bin  boot  dev  etc  file1  home  lib  lib64  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  var
+
+28. Install software of your choice in ubuntu container using "apt-get install"
+
+Ans: root@2eeaf262cd4f:/# apt-get install java
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+E: Unable to locate package java
+
+29. Now exit the ubuntu shell, are you back to your host machine, if not, come back to the host machine.
+
+Ans: exit
+
+30. Check if the ubuntu container is running.
+
+Ans: No, its not running
+
+31. Create a new ubuntu container out of the same image as that previous container in attached mode.
+
+Ans: docker run -it --name MyUbuntu3 ubuntu:18.04
+
+32. Login as a root user
+
+Ans: root@f44563674751:/#
+
+33. Check if you can see the file created in previous container, you will not see the file as well as software that you installed in the previous container. Now kill this Container.
+
+Ans: No, I can't see that file and the software that I installed.
+root@f44563674751:/# ls
+bin   dev  home  lib64  mnt  proc  run   srv  tmp  var
+boot  etc  lib   media  opt  root  sbin  sys  usr
+
+C:\Users\Navya>docker kill MyUbuntu3
+MyUbuntu3
+
+34. Do you have the previous ubuntu container where you created the file and installed the software? If no repeat step 25 to 29.
+
+Ans: docker start MyUbuntu1
+
+35. Create an Image out of the existing container.
+
+Ans: docker commit 2eeaf262cd4f 16101999/ubuntu:1.0
+
+36. Now Create a Container out of this image and login into it to see if you can see the file and software installed by you in the previous container.
+
+Ans: docker run -it --name Navya_Ubuntu 16101999/ubuntu:1.0
+root@4633de4598ac:/# ls
+bin   dev  file1  lib    media  opt   root  sbin  sys  usr
+boot  etc  home   lib64  mnt    proc  run   srv   tmp  var
+
+37. Do you have running tomcat container? If yes, Stop it and kill all tomcat container.
+
+Ans: Yes, 
+docker stop mytomcat
+mytomcat
+docker rm mytomcat
+mytomcat
+
+38. Create an index.html file with following code in it:-
+	<h1>This is Tomcat Container</h1>
+Now, Start a ubuntu container, login into the ubuntu, install nginx, access nginx's home page from the container,
+Now, come out of the ubuntu container and replace the existing index.html page of nginx with above index.html page that you created, Now access the nginx server from host machine, it should display the index.html that you have created.
+
+Ans: touch index.html
+docker run -it --name ubuntunginx ubuntu
+root@bfe87f1902bc:/# apt-get update
+root@bfe87f1902bc:/# apt-get install nginx
+root@bfe87f1902bc:/# cd usr/share/nginx/html
+root@bfe87f1902bc:/usr/share/nginx/html# ls
+index.html
+root@bfe87f1902bc:/usr/share/nginx/html# cat index.html
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+
+39. type below command:-
+	docker images --help
+Now, try to run command that proves the concept of following three options:-
+1. -a 
+2. -f 
+3. -q 
+
+write atleast 1 command using each option above and prove their concepts as described in the --help.
+
+Ans: docker images --help
+
+Usage:  docker images [OPTIONS] [REPOSITORY[:TAG]]
+
+List images
+
+Options:
+  -a, --all             Show all images (default hides intermediate images)
+      --digests         Show digests
+  -f, --filter filter   Filter output based on conditions provided
+      --format string   Pretty-print images using a Go template
+      --no-trunc        Don't truncate output
+  -q, --quiet           Only show image IDs
+
+1) docker images -a
+REPOSITORY               TAG       IMAGE ID       CREATED             SIZE
+16101999/ubuntu          1.0       2f6d3b50e018   About an hour ago   101MB
+nginx                    latest    822b7ec2aaf2   23 hours ago        133MB
+ubuntu                   21.04     e5ec58a9f549   4 days ago          80MB
+ubuntu                   18.04     54919e10a95d   4 days ago          63.1MB
+docker/getting-started   latest    083d7564d904   2 months ago        28MB
+
+2) docker images -f -> Filter output based on conditions provided
+
+3) docker images -q
+2f6d3b50e018
+822b7ec2aaf2
+e5ec58a9f549
+54919e10a95d
+083d7564d904
+
+40. type below command:-
+	docker ps --help
+Now, try to run command that proves the concept of following six options:-
+1. -a
+2. -f
+3. -q
+4. -n
+5. -l
+6. -s
+
+write atleast 1 command using each option above and prove their concepts as described in the --help.
+
+Ans: docker ps --help
+
+Usage:  docker ps [OPTIONS]
+
+List containers
+
+Options:
+  -a, --all             Show all containers (default shows just running)
+  -f, --filter filter   Filter output based on conditions provided
+      --format string   Pretty-print containers using a Go template
+  -n, --last int        Show n last created containers (includes all
+                        states) (default -1)
+  -l, --latest          Show the latest created container (includes all
+                        states)
+      --no-trunc        Don't truncate output
+  -q, --quiet           Only display container IDs
+  -s, --size            Display total file sizes
+
+1) docker ps -a
+CONTAINER ID   IMAGE                    COMMAND                  CREATED             STATUS                      PORTS     NAMES
+4633de4598ac   16101999/ubuntu:1.0      "bash"                   About an hour ago   Up About an hour                      Navya_Ubuntu
+f44563674751   ubuntu:18.04             "bash"                   16 hours ago        Exited (137) 16 hours ago             MyUbuntu3
+8ef53a10bb38   ubuntu:21.04             "bash"                   16 hours ago        Exited (0) 16 hours ago               MyUbuntu2
+2eeaf262cd4f   ubuntu:18.04             "bash"                   16 hours ago        Up About an hour                      MyUbuntu1
+b8ea1c4c2791   822b7ec2aaf2             "/docker-entrypoint.…"   20 hours ago        Exited (0) 17 hours ago               my-nginx
+7a600b5c2b37   docker/getting-started   "/docker-entrypoint.…"   21 hours ago        Exited (0) 17 hours ago               priceless_hertz
+
+2) docker ps -f -> Filter output based on conditions provided
+
+3) docker ps -q
+4633de4598ac
+2eeaf262cd4f
+
+4) docker ps -n -1
+CONTAINER ID   IMAGE                 COMMAND   CREATED             STATUS             PORTS     NAMES
+4633de4598ac   16101999/ubuntu:1.0   "bash"    About an hour ago   Up About an hour             Navya_Ubuntu
+2eeaf262cd4f   ubuntu:18.04          "bash"    16 hours ago        Up 2 hours                   MyUbuntu1
+
+5) docker ps -l
+CONTAINER ID   IMAGE                 COMMAND   CREATED             STATUS             PORTS     NAMES
+4633de4598ac   16101999/ubuntu:1.0   "bash"    About an hour ago   Up About an hour             Navya_Ubuntu
+
+6) docker ps -s
+CONTAINER ID   IMAGE                 COMMAND   CREATED             STATUS             PORTS     NAMES          SIZE
+4633de4598ac   16101999/ubuntu:1.0   "bash"    About an hour ago   Up About an hour             Navya_Ubuntu   73B (virtual 101MB)
+2eeaf262cd4f   ubuntu:18.04          "bash"    16 hours ago        Up 2 hours                   MyUbuntu1      37.4MB (virtual 101MB)
+
+41. Type below command:-
+	docker --help
+
+you will various sections of commands apart from options like "Managemnet Commands" and "Commands".
+
+Write some texts below describing the use of "Management Commands".
+
+Use each command mentioned below and prove its concepts as described in the --help desription. write what you have understood from the output of the command after its successful execution.
+1. cp
+2. create
+3. export
+4. history
+5. info
+6. login
+7. logout
+8. rename
+9. save
+10. stats
+11. top
+
+Ans: 
+1) cp -> Copy files/folders between a container and the local filesystem
+        docker cp demo.txt Ubuntu:/demo.txt
+2) create -> Create a n+ew container
+   docker create --name Demo nginx
+3) export -> Export a container's filesystem as a tar archive
+   docker export Demo>latest.tar
+4) history -> Show the history of an image
+   docker history ubuntu:20.04
+5) info -> Display system-wide information
+   docker info
+6) login -> Log in to a Docker registry
+   docker login
+7) logout -> Log out from a Docker registry
+   docker logout
+8) rename -> Rename a container
+   docker rename Demo newDemo
+9) save -> Save one or more images to a tar archive (streamed to STDOUT by default)
+10) stats -> Display a live stream of container(s) resource usage statistics
+    docker stats -a
+11) top -> Display the running processes of a container
+    docker top MyTomcat
+
+42. Kill all running container in one liner command.
+
+Ans: docker kill $(docker ps -q) 
+
+43. Delete all images in one liner command.
+
+Ans: docker rmi -f $(docker images -q)
+
+44. Create a simple Dockerfile, build it and run it.
+
+Ans: Created Dockerfile
+docker build -t fileubuntu:1.0 .
+docker run --name myfile fileubuntu:1.0
+
+45. Create one or more Dockerfile that demostrate the following commands in Dockerfile (Write a PoC for each in one or more Dockerfile)
+	1. USER
+	2. RUN
+	3. ENV
+	4. CMD
+	5. ENTRYPOINT
+	6. EXPOSE
+	7. VOLUME
+
+Ans: 
+FROM ubuntu
+MAINTAINER navya.suresh-hegde@capgemini.com
+USER 123
+RUN apt -get update
+ENV abc="hello"
+CMD [ "echo" , " hello world" ]
+ENTRYPOINT [ "echo", "Hello, World" ]
+EXPOSE 80 
+VOLUME /vol1
+
+USER:The USER instruction sets the user name (or UID) and optionally the user group (or GID) to use when running the image and for any RUN, CMD and ENTRYPOINT instructions that follow it in the Dockerfile.
+RUN:The RUN instruction will execute any commands in a new layer on top of the current image and commit the results. The resulting committed image will be used for the next step in the Dockerfile.
+ENV:Environment variables (declared with the ENV statement) can also be used in certain instructions as variables to be interpreted by the Dockerfile.
+CMD:There can only be one CMD instruction in a Dockerfile. If you list more than one CMD then only the last CMD will take effect.
+ENTRYPOINT:An ENTRYPOINT allows you to configure a container that will run as an executable.
+EXPOSE:The EXPOSE instruction informs Docker that the container listens on the specified network ports at runtime. You can specify whether the port listens on TCP or UDP, and the default is TCP if the protocol is not specified.
+VOLUME:The VOLUME instruction creates a mount point with the specified name and marks it as holding externally mounted volumes from native host or other containers.
+	
+46. Dockerhub:-
+	Find a application you care about on docker hub.
+	Launch the container.
+	Install another application in it.
+	Save (commit) the image.
+	Upload that to docker hub in your account and share it with a colleague, ask them to use your image and run the container out of it in their machine/vm.
+
+Ans: docker run -it --name MyUbuntu ubuntu
+apt-get update
+apt-get install java
+docker commit dcb7c01ac73a 16101999/MyUbuntu
+docker push 16101999/myubuntu
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Advanced Assignment:-
+
+Assignment - Dockers and Containers
+
+---Introduction
+The goal of this assignment is to get you familiarized with dockers. You will learn about how to dockerize any application by building a simple client and server containers using dockers.
+
+---What is to be done?
+You will be building two containers using docker. These containers can be built starting from an official base image. Official Images has a list of different official base images. Start from the image that is suitable for you.
+
+---Server :
+Create a volume by name "servervol".
+The server container will mount "servervol" in "/serverdata".
+This container runs a server application which will create a file of size 1KB with random text data in "/serverdata" and then transfer the file to the client along with the checksum.
+The server application itself can be built using any language you are comfortable with. But, the container should include all the packages that are required to run your application. Choose your base image wisely and install only the necessary packages.
+The port on which the server runs must be specified as a command line argument when we run docker.
+
+---Client:
+Create a volume by name "clientvol".
+The client container will mount "clientvol" in "/clientdata".
+The client container runs an application that connects to the server, recieves the file that the server sends and saves it in "/clientdata".
+Verify that the file is received properly at the clientside by verifying the checksum.
+The client application again can be wriiten in any language that you are comfortable with, but the container should include all the necessary packages. Choose your base image wisely and install only necessary packages.
+You need to create a user-defined network in docker and run both these containers on the network created. The containers should run these applications by default (i.e, on run command). Mention in README as to what should be done to get into the container shell instead of running the applications by default (i.e, on run command).
+
+NOTE: You should be able to get into the shell of the client container to physically check if the file has been recieved.
+
+---What to submit?
+Create a new empty branch in your git repos named "assignment2".
+You will be submitting the files that you use to build the server and client containers. Checkout the assignment2 branch and submit the files related to server and client in two folders named "server" and "client" respectively.
+As you go about doing the assignment, you will learn that there are multiple ways to create volumes and to have the containers communicate to each other. So submit a README file that expains what method you use.
+Create two scripts. one for the server("fileserver.sh") and the other for the client ("fileclient.sh") that has all the commands to build and run server and client containers respectively. These scripts should include the volume creation for client and server respectively. The server script should also include the creation of user-defined network before server runs.
+The scripts and the README should be in the root of your branch (outside your server and client directories).
+
+---What is tested?
+
+Run the "fileserver.sh" script on one terminal. It should create the user-defined network, the "servervol", start the server and wait for the client connection.
+Run "fileclient.sh" in another terminal. This script should find out the server's IP, create the "clientvol" and run the client container by specifying server's IP and port as command line parameters.
+When the client container is run, a connection between the server and client is established and the file is transferred from the server to the client.
+Your code and scripts will be tested on creation of volumes, proper running of server and client and file transfer.
+You should make sure that the server can transfer any file with random text and the checksum verification succeeds on the client when it receives the file.
+
+
+---Grade Distribution
+
+Build and run server container - 30 points
+Build and run client container - 30 points
+Proper communication between the two - 15 points
+Scripts to run the containers - 15 points
+README file - 10 points
+------------------------------------------------------------------------------------------------------------------------------------
+Advanced Assignment 2
+---Introduction
+The goal of this assignment is to get you familiarized with CI-CD Pipeline for Creating docker images after successfull build.
+
+
+You already built 2 app(client and server) from the "Part 1" Assignment.
+
+
+NOTE: You should be able to get the docker image for both Client and Server after successfull build using Jenkins Pipeline.
+
+
+Your Client app and Server app must be in the github.
+Whenever developer commits changes to client/server app in github, it should trigger a build on Jenkins.
+Jenkins Pipeline should do maven clean and package
+Jenkins Pipeline should also do the static-code analysis using (checkstyle/sonarqube)
+Jenkins pipeline at the end should create docker image
+On build failure, Jenkins pipeline should send an email to any emailId about the failure.
+
+
+
+---Grade Distribution
+
+Proper Build trigger - 20 points
+Proper Declarative Jenkins file - 20 points
+Clean, Package and Code Analysis - 20 points
+Creating docker image on successful build - 20 points
+Sending email on build failure - 20 points
+
